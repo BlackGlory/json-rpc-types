@@ -43,7 +43,10 @@ export function isJsonRpcNotification<T>(val: unknown): val is JsonRpcNotificati
       && val.jsonrpc === '2.0'
       && isString(val.method)
       && isUndefined(val.id)
-      && isJsonRpcParams(val.params)
+      && (
+           isUndefined(val.params) ||
+           isJsonRpcParams(val.params)
+         )
 }
 
 export function isntJsonRpcNotification<T>(
@@ -57,7 +60,10 @@ export function isJsonRpcRequest<T>(val: unknown): val is JsonRpcRequest<T> {
       && val.jsonrpc === '2.0'
       && isString(val.method)
       && isJsonRpcId(val.id)
-      && isJsonRpcParams(val.params)
+      && (
+           isUndefined(val.params) ||
+           isJsonRpcParams(val.params)
+         )
 }
 
 export function isntJsonRpcRequest<T>(val: T): val is Exclude<T, JsonRpcRequest<unknown>> {
@@ -94,9 +100,11 @@ function isJsonRpcErrorObject<T>(val: unknown): val is JsonRpcErrorObject<T> {
 }
 
 function isJsonRpcId(val: unknown): val is JsonRpcId {
-  return isString(val) || isNumber(val)
+  return isString(val)
+      || isNumber(val)
 }
 
 function isJsonRpcParams<T>(val: unknown): val is JsonRpcParams<T> {
-  return isArray(val) || isObject(val)
+  return isArray(val)
+      || isObject(val)
 }
