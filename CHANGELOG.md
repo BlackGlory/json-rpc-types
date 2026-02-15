@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/BlackGlory/json-rpc-types/compare/v0.1.2...v0.2.0) (2026-02-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* **is-json-rpc-error:** - CommonJS => ESM
+- Node.js v14 => Node.js v22
+
+### Bug Fixes
+
+* **is-json-rpc-error:** allow a primitive as error object data ([3d6132c](https://github.com/BlackGlory/json-rpc-types/commit/3d6132cf23c1c409abfe1a0d937449379b6fc673))
+* **is-json-rpc-notification, is-json-rpc-request:** handle optional params ([e5cac8b](https://github.com/BlackGlory/json-rpc-types/commit/e5cac8ba118afa240cfff477932b5e87a407c3bc))
+
 ### [0.1.2](https://github.com/BlackGlory/json-rpc-types/compare/v0.1.1...v0.1.2) (2024-12-13)
 
 
