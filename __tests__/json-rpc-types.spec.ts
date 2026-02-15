@@ -1,8 +1,8 @@
-import { describe, it, test, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 import { isJsonRpcNotification, isJsonRpcRequest, isJsonRpcSuccess, isJsonRpcError } from '@src/json-rpc-types.js'
 
 describe('isJsonRpcNotification', () => {
-  it('return true', () => {
+  test('true', () => {
     const obj = {
       jsonrpc: '2.0'
     , method: 'method'
@@ -14,7 +14,7 @@ describe('isJsonRpcNotification', () => {
     expect(result).toBe(true)
   })
 
-  it('return false', () => {
+  test('false', () => {
     const obj = {
       jsonrpc: '2.0'
     , id: 'id'
@@ -40,7 +40,7 @@ describe('isJsonRpcNotification', () => {
 })
 
 describe('isJsonRpcRequest', () => {
-  it('return true', () => {
+  test('true', () => {
     const obj = {
       jsonrpc: '2.0'
     , id: 'id'
@@ -53,7 +53,7 @@ describe('isJsonRpcRequest', () => {
     expect(result).toBe(true)
   })
 
-  it('return false', () => {
+  test('false', () => {
     const obj = {
       jsonrpc: '2.0'
     , method: 'method'
@@ -79,80 +79,70 @@ describe('isJsonRpcRequest', () => {
 })
 
 describe('isJsonRpcSuccess', () => {
-  describe('result exists', () => {
-    it('return true', () => {
-      const obj = {
-        jsonrpc: '2.0'
-      , id: 'id'
-      , result: undefined
-      }
+  test('result exists', () => {
+    const obj = {
+      jsonrpc: '2.0'
+    , id: 'id'
+    , result: undefined
+    }
 
-      const result = isJsonRpcSuccess(obj)
+    const result = isJsonRpcSuccess(obj)
 
-      expect(result).toBe(true)
-    })
+    expect(result).toBe(true)
   })
 
-  describe('result does not exist', () => {
-    it('return false', () => {
-      const obj = {
-        jsonrpc: '2.0'
-      , id: 'id'
-      }
+  test('result does not exist', () => {
+    const obj = {
+      jsonrpc: '2.0'
+    , id: 'id'
+    }
 
-      const result = isJsonRpcSuccess(obj)
+    const result = isJsonRpcSuccess(obj)
 
-      expect(result).toBe(false)
-    })
+    expect(result).toBe(false)
   })
 })
 
 describe('isJsonRpcError', () => {
   describe('error exists', () => {
-    describe('error structure is legal', () => {
-      it('return true', () => {
-        const obj = {
-          jsonrpc: '2.0'
-        , id: 'id'
-        , error: {
-            code: 0
-          , message: 'message'
-          }
-        }
-
-        const result = isJsonRpcError(obj)
-
-        expect(result).toBe(true)
-      })
-    })
-
-    describe('error sturcture is illegal', () => {
-      it('return false', () => {
-        const obj = {
-          jsonrpc: '2.0'
-        , id: 'id'
-        , error: {
-            code: 0
-          }
-        }
-
-        const result = isJsonRpcError(obj)
-
-        expect(result).toBe(false)
-      })
-    })
-  })
-  
-  describe('error does not exist', () => {
-    it('return false', () => {
+    test('valid error structure', () => {
       const obj = {
         jsonrpc: '2.0'
       , id: 'id'
+      , error: {
+          code: 0
+        , message: 'message'
+        }
+      }
+
+      const result = isJsonRpcError(obj)
+
+      expect(result).toBe(true)
+    })
+
+    test('invalid error sturcture', () => {
+      const obj = {
+        jsonrpc: '2.0'
+      , id: 'id'
+      , error: {
+          code: 0
+        }
       }
 
       const result = isJsonRpcError(obj)
 
       expect(result).toBe(false)
     })
+  })
+
+  test('error does not exist', () => {
+    const obj = {
+      jsonrpc: '2.0'
+    , id: 'id'
+    }
+
+    const result = isJsonRpcError(obj)
+
+    expect(result).toBe(false)
   })
 })
