@@ -1,7 +1,12 @@
 import { isArray, isPlainObject, isObject, isString, isNumber, isUndefined } from '@blackglory/types'
 
-export type JsonRpcId = string | number
-export type JsonRpcParams<T> = T[] | Record<string, T>
+export type JsonRpcId =
+| string
+| number
+
+export type JsonRpcParams<T> =
+| T[]
+| Record<string, T>
 
 export interface JsonRpcNotification<T> {
   jsonrpc: '2.0'
