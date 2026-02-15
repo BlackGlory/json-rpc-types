@@ -40,7 +40,7 @@ export interface JsonRpcErrorObject<T> {
 
 export function isJsonRpcNotification<T>(val: unknown): val is JsonRpcNotification<T> {
   return isPlainObject(val)
-      && isString(val.jsonrpc)
+      && val.jsonrpc === '2.0'
       && isString(val.method)
       && isUndefined(val.id)
       && isJsonRpcParams(val.params)
@@ -54,7 +54,7 @@ export function isntJsonRpcNotification<T>(
 
 export function isJsonRpcRequest<T>(val: unknown): val is JsonRpcRequest<T> {
   return isPlainObject(val)
-      && isString(val.jsonrpc)
+      && val.jsonrpc === '2.0'
       && isString(val.method)
       && isJsonRpcId(val.id)
       && isJsonRpcParams(val.params)
@@ -66,7 +66,7 @@ export function isntJsonRpcRequest<T>(val: T): val is Exclude<T, JsonRpcRequest<
 
 export function isJsonRpcSuccess<T>(val: unknown): val is JsonRpcSuccess<T> {
   return isPlainObject(val)
-      && isString(val.jsonrpc)
+      && val.jsonrpc === '2.0'
       && isJsonRpcId(val.id)
       && 'result' in val
 }
@@ -77,7 +77,7 @@ export function isntJsonRpcSuccess<T>(val: T): val is Exclude<T, JsonRpcSuccess<
 
 export function isJsonRpcError<T>(val: unknown): val is JsonRpcError<T> {
   return isPlainObject(val)
-      && isString(val.jsonrpc)
+      && val.jsonrpc === '2.0'
       && isJsonRpcId(val.id)
       && isJsonRpcErrorObject(val.error)
 }
