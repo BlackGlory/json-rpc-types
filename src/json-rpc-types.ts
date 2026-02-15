@@ -101,7 +101,10 @@ function isJsonRpcErrorObject<T>(val: unknown): val is JsonRpcErrorObject<T> {
   return isPlainObject(val)
       && isNumber(val.code)
       && isString(val.message)
-      && (isUndefined(val.data) || isJSONValue(val.data))
+      && (
+           isUndefined(val.data) ||
+           isJSONValue(val.data)
+         )
 }
 
 function isJsonRpcId(val: unknown): val is JsonRpcId {
@@ -110,6 +113,12 @@ function isJsonRpcId(val: unknown): val is JsonRpcId {
 }
 
 function isJsonRpcParams<T>(val: unknown): val is JsonRpcParams<T> {
-  return isArray(val)
-      || isPlainObject(val)
+  return (
+           isArray(val) &&
+           val.every(isJSONValue)
+         )
+      || (
+           isPlainObject(val) &&
+           Object.values(val).every(isJSONValue)
+         )
 }
