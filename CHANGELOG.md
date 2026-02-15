@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/BlackGlory/json-rpc-types/compare/v0.2.0...v0.2.1) (2026-02-15)
+
+
+### Features
+
+* **is-json-rpc-params:** add more checks ([fdfdbae](https://github.com/BlackGlory/json-rpc-types/commit/fdfdbae9ea1070545274855e4cf16604c0205fd7))
+
+
+### Bug Fixes
+
+* **is-json-rpc-success:** check the type of result ([da10045](https://github.com/BlackGlory/json-rpc-types/commit/da100450026173d51d3b7473fd3306f00eefe2c2))
+
 ## [0.2.0](https://github.com/BlackGlory/json-rpc-types/compare/v0.1.2...v0.2.0) (2026-02-15)
 
 
