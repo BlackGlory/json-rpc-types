@@ -1,4 +1,5 @@
-import { isJsonRpcNotification, isJsonRpcRequest, isJsonRpcSuccess, isJsonRpcError } from '@src/json-rpc-types'
+import { describe, it, test, expect } from 'vitest'
+import { isJsonRpcNotification, isJsonRpcRequest, isJsonRpcSuccess, isJsonRpcError } from '@src/json-rpc-types.js'
 
 describe('isJsonRpcNotification', () => {
   it('return true', () => {
@@ -130,7 +131,9 @@ describe('isJsonRpcError', () => {
         const obj = {
           jsonrpc: '2.0'
         , id: 'id'
-        , error: { code: 0 }
+        , error: {
+            code: 0
+          }
         }
 
         const result = isJsonRpcError(obj)

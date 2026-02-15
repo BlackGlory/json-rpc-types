@@ -1,4 +1,4 @@
-import { isArray, isPlainObject, isObject, isString, isNumber, isUndefined } from '@blackglory/types'
+import { isArray, isPlainObject, isString, isNumber, isUndefined, isJSONValue } from '@blackglory/prelude'
 
 export type JsonRpcId =
 | string
@@ -101,7 +101,7 @@ function isJsonRpcErrorObject<T>(val: unknown): val is JsonRpcErrorObject<T> {
   return isPlainObject(val)
       && isNumber(val.code)
       && isString(val.message)
-      && (isUndefined(val.data) || isObject(val.data))
+      && (isUndefined(val.data) || isJSONValue(val.data))
 }
 
 function isJsonRpcId(val: unknown): val is JsonRpcId {
@@ -111,5 +111,5 @@ function isJsonRpcId(val: unknown): val is JsonRpcId {
 
 function isJsonRpcParams<T>(val: unknown): val is JsonRpcParams<T> {
   return isArray(val)
-      || isObject(val)
+      || isPlainObject(val)
 }

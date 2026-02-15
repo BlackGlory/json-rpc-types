@@ -1,1 +1,1 @@
-export * from './json-rpc-types'
+export * from './json-rpc-types.js'
