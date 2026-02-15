@@ -6,7 +6,7 @@ describe('isJsonRpcNotification', () => {
     const obj = {
       jsonrpc: '2.0'
     , method: 'method'
-    , params: []
+    , params: [new Date().getTime()]
     }
 
     const result = isJsonRpcNotification(obj)
@@ -19,7 +19,7 @@ describe('isJsonRpcNotification', () => {
       jsonrpc: '2.0'
     , id: 'id'
     , method: 'method'
-    , params: []
+    , params: [new Date()]
     }
 
     const result = isJsonRpcNotification(obj)
@@ -45,7 +45,7 @@ describe('isJsonRpcRequest', () => {
       jsonrpc: '2.0'
     , id: 'id'
     , method: 'method'
-    , params: []
+    , params: [new Date().getTime()]
     }
 
     const result = isJsonRpcRequest(obj)
@@ -57,7 +57,7 @@ describe('isJsonRpcRequest', () => {
     const obj = {
       jsonrpc: '2.0'
     , method: 'method'
-    , params: []
+    , params: [new Date()]
     }
 
     const result = isJsonRpcRequest(obj)
@@ -105,41 +105,31 @@ describe('isJsonRpcSuccess', () => {
 })
 
 describe('isJsonRpcError', () => {
-  describe('error exists', () => {
-    test('valid error structure', () => {
-      const obj = {
-        jsonrpc: '2.0'
-      , id: 'id'
-      , error: {
-          code: 0
-        , message: 'message'
-        }
-      }
-
-      const result = isJsonRpcError(obj)
-
-      expect(result).toBe(true)
-    })
-
-    test('invalid error sturcture', () => {
-      const obj = {
-        jsonrpc: '2.0'
-      , id: 'id'
-      , error: {
-          code: 0
-        }
-      }
-
-      const result = isJsonRpcError(obj)
-
-      expect(result).toBe(false)
-    })
-  })
-
-  test('error does not exist', () => {
+  test('true', () => {
     const obj = {
       jsonrpc: '2.0'
     , id: 'id'
+    , error: {
+        code: 0
+      , message: 'message'
+      , data: new Date().getTime()
+      }
+    }
+
+    const result = isJsonRpcError(obj)
+
+    expect(result).toBe(true)
+  })
+
+  test('false', () => {
+    const obj = {
+      jsonrpc: '2.0'
+    , id: 'id'
+    , error: {
+        code: 0
+      , message: 'message'
+      , data: new Date()
+      }
     }
 
     const result = isJsonRpcError(obj)
