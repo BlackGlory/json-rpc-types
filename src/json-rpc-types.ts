@@ -79,7 +79,7 @@ export function isJsonRpcSuccess<T>(val: unknown): val is JsonRpcSuccess<T> {
   return isPlainObject(val)
       && val.jsonrpc === '2.0'
       && isJsonRpcId(val.id)
-      && 'result' in val
+      && isJSONValue(val.result)
 }
 
 export function isntJsonRpcSuccess<T>(val: T): val is Exclude<T, JsonRpcSuccess<unknown>> {

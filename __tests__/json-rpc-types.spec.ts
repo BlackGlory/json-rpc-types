@@ -79,11 +79,11 @@ describe('isJsonRpcRequest', () => {
 })
 
 describe('isJsonRpcSuccess', () => {
-  test('result exists', () => {
+  test('true', () => {
     const obj = {
       jsonrpc: '2.0'
     , id: 'id'
-    , result: undefined
+    , result: null
     }
 
     const result = isJsonRpcSuccess(obj)
@@ -91,10 +91,11 @@ describe('isJsonRpcSuccess', () => {
     expect(result).toBe(true)
   })
 
-  test('result does not exist', () => {
+  test('false', () => {
     const obj = {
       jsonrpc: '2.0'
     , id: 'id'
+    , result: undefined
     }
 
     const result = isJsonRpcSuccess(obj)
