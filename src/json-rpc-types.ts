@@ -80,6 +80,7 @@ export function isJsonRpcSuccess<T>(val: unknown): val is JsonRpcSuccess<T> {
       && val.jsonrpc === '2.0'
       && isJsonRpcId(val.id)
       && isJSONValue(val.result)
+      && !('error' in val) // 规范中明确规定互斥.
 }
 
 export function isntJsonRpcSuccess<T>(val: T): val is Exclude<T, JsonRpcSuccess<unknown>> {
@@ -91,6 +92,7 @@ export function isJsonRpcError<T>(val: unknown): val is JsonRpcError<T> {
       && val.jsonrpc === '2.0'
       && isJsonRpcId(val.id)
       && isJsonRpcErrorObject(val.error)
+      && !('result' in val) // 规范中明确规定互斥.
 }
 
 export function isntJsonRpcError<T>(val: T): val is Exclude<T, JsonRpcError<unknown>> {

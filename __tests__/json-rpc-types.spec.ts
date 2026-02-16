@@ -102,6 +102,23 @@ describe('isJsonRpcSuccess', () => {
 
     expect(result).toBe(false)
   })
+
+  test('edge: include error', () => {
+    const obj = {
+      jsonrpc: '2.0'
+    , id: 'id'
+    , result: null
+    , error: {
+        code: 0
+      , message: 'message'
+      , data: new Date().getTime()
+      }
+    }
+
+    const result = isJsonRpcSuccess(obj)
+
+    expect(result).toBe(false)
+  })
 })
 
 describe('isJsonRpcError', () => {
@@ -129,6 +146,23 @@ describe('isJsonRpcError', () => {
         code: 0
       , message: 'message'
       , data: new Date()
+      }
+    }
+
+    const result = isJsonRpcError(obj)
+
+    expect(result).toBe(false)
+  })
+
+  test('edge: include result', () => {
+    const obj = {
+      jsonrpc: '2.0'
+    , id: 'id'
+    , result: null
+    , error: {
+        code: 0
+      , message: 'message'
+      , data: new Date().getTime()
       }
     }
 
