@@ -1,5 +1,7 @@
 import { isArray, isPlainObject, isString, isNumber, isUndefined, isJSONValue } from '@blackglory/prelude'
 
+// 规范中还允许使用null值作为id, 这是一个有问题的设计, 因为正常使用场景中不可能出现.
+// 在本项目中, null值作为id的情况被刻意忽视.
 export type JsonRpcId =
 | string
 | number
